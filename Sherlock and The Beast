@@ -1,0 +1,51 @@
+process.stdin.resume();
+process.stdin.setEncoding('ascii');
+
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
+
+process.stdin.on('data', function (data) {
+    input_stdin += data;
+});
+
+process.stdin.on('end', function () {
+    input_stdin_array = input_stdin.split("\n");
+    main();    
+});
+
+function readLine() {
+    return input_stdin_array[input_currentline++];
+}
+
+/////////////// ignore above this line ////////////////////
+
+function main() {
+    var t = parseInt(readLine());
+    for(var a0 = 0; a0 < t; a0++){
+        var n = parseInt(readLine());
+        var x=n;
+        var fives="";
+        var trees="";
+        for(var i=x;i>0;i-=3){
+            if(i%3==0){
+                fives="5".repeat(i);
+                break;
+            }else if(i%5==0){
+                trees="3".repeat(i);
+                fives="5".repeat(x-i);
+                break;
+            }
+        }
+        if (trees=="" && fives==""){
+            console.log(-1);
+        }else if(trees==""){
+            console.log(fives);
+        }else if(fives==""){
+            console.log(trees);
+        }else{
+            console.log(fives+trees);
+        }
+    }
+
+}
