@@ -1,0 +1,44 @@
+process.stdin.resume();
+process.stdin.setEncoding('ascii');
+
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
+
+process.stdin.on('data', function (data) {
+    input_stdin += data;
+});
+
+process.stdin.on('end', function () {
+    input_stdin_array = input_stdin.split("\n");
+    main();    
+});
+
+function readLine() {
+    return input_stdin_array[input_currentline++];
+}
+
+/////////////// ignore above this line ////////////////////
+
+function main() {
+    var n = parseInt(readLine());
+    var grid = [];
+    for(var grid_i = 0; grid_i < n; grid_i++){
+       grid[grid_i] = readLine().split("");
+    }
+    for(var i=0;i<n;i++){
+        for(var j=0;j<n;j++){
+            if(j==0||j==n-1||i==0||i==n-1){
+                continue;
+            }
+            if(grid[i][j]>grid[i][j-1]&&grid[i][j]>grid[i-1][j]&&grid[i][j]>grid[i][j+1]&&grid[i][j]>grid[i+1][j]){
+                grid[i][j]="X";
+            }
+            
+        }
+        
+        grid[i]=grid[i].join('');
+        console.log(grid[i]);
+    }
+
+}
